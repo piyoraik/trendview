@@ -1,0 +1,78 @@
+<div class="col-xs-3">
+    <%= render 'layouts/list' %>
+</div>
+<div class="col-xs-9">
+    <table class="table">
+        <thead>
+            <th>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        日時
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation">
+                            <%= link_to '降順', root_path(sort: '1',search: @word, date: @date, tag: "1",city: @city, order: 'desc') %>
+                            <%= link_to '昇順', root_path(sort: '1',search: @word, date: @date, tag: "1",city: @city ,order: 'asc') %>
+                        </li>
+    　              </ul>
+                </div>
+            </th>
+            <th>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        ランク
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation">
+                            <%= link_to '降順', root_path(sort: '2',search: @word, date: @date, tag: "1",city: @city , order: 'desc') %>
+                            <%= link_to '昇順', root_path(sort: '2',search: @word, date: @date, tag: "1",city: @city , order: 'asc') %>
+                        </li>
+    　              </ul>
+                </div>
+            </th>
+            <th>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        トレンドワード
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation">
+                            <%= link_to '降順', root_path(sort: '3',search: @word, date: @date, tag: "1",city: @city , order: 'desc') %>
+                            <%= link_to '昇順', root_path(sort: '3',search: @word, date: @date, tag: "1",city: @city , order: 'asc') %>
+                        </li>
+    　              </ul>
+                </div>
+            </th>
+            <th>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        ツイート数
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation">
+                            <%= link_to '降順', root_path(sort: '4',search: @word, date: @date, tag: "1",city: @city , order: 'desc') %>
+                            <%= link_to '昇順', root_path(sort: '4',search: @word, date: @date, tag: "1",city: @city , order: 'asc') %>
+                        </li>
+    　              </ul>
+                </div>
+            </th>
+            <th>都市</th>
+        </thead>
+        <% @trends.each do |trend| %>
+            <tr>
+                <td><%= trend.now.strftime("%Y-%m-%d %H:%M") %></td>
+                <td><%= trend.rank %></td>
+                <td><%= link_to trend.word, show_path(word: trend.word) %></td>
+                <td><%= trend.tweetcount %></td>
+                <td><%= trend.city %></td>
+            </tr>
+        <% end %>
+    </table>
+    <div class="col-xs-offset-2">
+        <%= paginate @trends %>
+    </div>
+</div>

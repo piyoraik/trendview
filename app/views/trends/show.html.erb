@@ -1,0 +1,49 @@
+<div class="col-xs-3">
+    <%= render 'layouts/list' %>
+</div>
+<div class="col-xs-9">
+    <h2><%= @word %></h2>
+    <table class="table">
+        <thead>
+            <th>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        日時
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation">
+                            <%= link_to '降順', show_path(word: @word,sort: '1', order: 'desc') %>
+                            <%= link_to '昇順', show_path(word: @word,sort: '1', order: 'asc') %>
+                        </li>
+    　              </ul>
+                </div>
+            </th>
+            <th>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        都市
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation">
+                            <%= link_to '降順', show_path(word: @word,sort: '2', order: 'desc') %>
+                            <%= link_to '昇順', show_path(word: @word,sort: '2', order: 'asc') %>
+                        </li>
+    　              </ul>
+                </div>
+            </th>
+        </thead>
+        <tbody>
+            <% @trends.each do |trend| %>
+                <tr>
+                    <td><%= trend.now.strftime("%Y-%m-%d %H:%M") %></td>
+                    <td><%= trend.city %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <div class="col-xs-offset-2">
+        <%= paginate @trends %>
+    </div>
+</div>

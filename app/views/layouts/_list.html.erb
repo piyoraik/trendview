@@ -1,0 +1,45 @@
+<h2>CitySelect</h2>
+<div>
+    <h3 class="col-xs-offset-1">
+        <%= link_to  "日本", root_path(tag: '1', city: '日本') %>
+    </h3>
+    <h3 class="col-xs-offset-1">
+        <%= link_to  "東京", root_path(tag: '1', city: '東京') %>
+    </h3>
+    <h3 class="col-xs-offset-1">
+        <%= link_to  "大阪", root_path(tag: '1', city: '大阪') %>
+    </h3>
+</div>
+
+<h2>WordSearch</h2>
+<%= form_with url: root_path, local: true, method: :get do |f| %>
+    <%= f.hidden_field :tag, :value => "1" %>
+    <%= f.hidden_field :sort, :value => "5" %>
+    <div class="row">
+        <%= date_field_tag 'date', nil, class:"col-xs-8 field" %>
+    </div>
+    <div class="row">
+        <%= text_field_tag :search,"",class:"col-xs-8 field" %>
+    </div>
+    <div class="row">
+        <%= f.select :city, [['日本', '日本'], ['東京', '東京'], ['大阪', '大阪']],{},class:"col-xs-8 field" %>
+    </div>
+    <div class="row">
+        <%= submit_tag 'Search', :name => nil, class:"col-xs-8 btn btn-success field" %>
+    </div>
+<% end %>
+
+<h2>Tallying</h2>
+<%= form_with url: tallying_path, local: true, method: :get do |f| %>
+    <%= f.hidden_field :tag, :value => "1" %>
+    <%= f.hidden_field :sort, :value => "5" %>
+    <div class="row">
+        <%= date_field_tag 'date', Date.today, class:"col-xs-8 field" %>
+    </div>
+    <div class="row">
+        <%= f.select :city, [['日本', '日本'], ['東京', '東京'], ['大阪', '大阪']],{},class:"col-xs-8 field" %>
+    </div>
+    <div class="row">
+        <%= submit_tag 'Search', :name => nil, class:"col-xs-8 btn btn-success field" %>
+    </div>
+<% end %>

@@ -1,0 +1,53 @@
+<div class="col-xs-3">
+    <%= render 'layouts/list' %>
+</div>
+<div class="col-xs-9">
+    <% if @err_msg %>
+        <div class="alert alert-danger" role="alert">
+            <%= @err_msg %>
+        </div>
+    <% end %>
+    <table class="table">
+        <thead>
+            <th>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        トレンドワード
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation">
+                            <%= link_to '降順', tallying_path(sort: '1',date: @date, tag: "1",city: @city, order: 'desc') %>
+                            <%= link_to '昇順', tallying_path(sort: '1', date: @date, tag: "1",city: @city ,order: 'asc') %>
+                        </li>
+    　              </ul>
+                </div>
+            </th>
+            <th>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        出現回数(15分毎)
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation">
+                            <%= link_to '降順', tallying_path(sort: '2',date: @date, tag: "1",city: @city, order: 'desc') %>
+                            <%= link_to '昇順', tallying_path(sort: '2', date: @date, tag: "1",city: @city ,order: 'asc') %>
+                        </li>
+    　              </ul>
+                </div>
+            </th>
+            <th>都市</th>
+        </thead>
+        <% @trends.each do |trend| %>
+            <tr>
+                <td><%= link_to trend.word, show_path(word: trend.word) %></td>
+                <td><%= trend.count %></td>
+                <td><%= trend.city %></td>
+            </tr>
+        <% end %>
+    </table>
+    <div class="col-xs-offset-2">
+        <%= paginate @trends %>
+    </div>
+</div>
