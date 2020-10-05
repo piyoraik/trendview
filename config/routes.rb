@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: 'trends#index'
-  get '/tallying' => 'trends#tallying', as: "tallying"
-  get '/:word' => 'trends#show', as: 'show'
+  namespace :v1 do
+    get '/search' => 'trends#search'
+    resources :trends, only: [:index]
+  end
 end
